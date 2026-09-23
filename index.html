@@ -1,168 +1,28 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0197B2">
-  <meta name="description" content="VIA CABS driver trip and collection portal">
-  <title>VIA CABS — Trip Log</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0197B2"><meta name="description" content="VIA CABS driver trip and collection portal"><title>VIA CABS — Trip Log</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <main class="app-shell">
-    <header class="topbar">
-      <div class="brand">
-        <img src="assets/via-logo.svg" alt="VIA CABS" class="brand-logo">
-        <div>
-          <div class="brand-name">VIA <span>CABS</span></div>
-          <div class="brand-subtitle">Driver Trip Log</div>
-        </div>
-      </div>
-      <div class="live-dot" title="Online"></div>
-    </header>
-
-    <section class="progress" aria-label="Trip progress">
-      <div class="step active" id="stepStart"><span>1</span><strong>Start Trip</strong></div>
-      <div class="progress-line"></div>
-      <div class="step" id="stepEnd"><span>2</span><strong>End Trip</strong></div>
-    </section>
-
-    <section class="card" id="startCard">
-      <div class="card-heading">
-        <div class="eyebrow">TODAY'S TRIP</div>
-        <h1>Start Trip</h1>
-        <p>Enter the starting odometer reading to begin.</p>
-      </div>
-
-      <form id="startForm" novalidate>
-        <label>Driver
-          <select id="driver" required>
-            <option value="">Select driver</option>
-            <option value="Rahul">Rahul</option>
-            <option value="Akshay">Akshay</option>
-            <option value="Prasad">Prasad</option>
-          </select>
-        </label>
-
-        <label>Vehicle Number
-          <input id="vehicle" type="text" readonly placeholder="Select driver first">
-        </label>
-
-        <div class="two-col">
-          <label>Date
-            <input id="date" type="text" readonly>
-          </label>
-          <label>Start Time
-            <input id="startTime" type="text" readonly>
-          </label>
-        </div>
-
-        <label>Start Odometer <span class="unit">KM</span>
-          <input id="startKM" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 45218.5" required>
-        </label>
-
-        <button class="primary-btn" type="submit">
-          Start Trip <span>→</span>
-        </button>
-      </form>
-    </section>
-
-    <section class="card hidden" id="endCard">
-      <div class="active-trip">
-        <div>
-          <div class="eyebrow">TRIP IN PROGRESS</div>
-          <h1>End Trip</h1>
-        </div>
-        <div class="vehicle-badge" id="activeVehicle">—</div>
-      </div>
-
-      <div class="trip-meta">
-        <div><span>Driver</span><strong id="activeDriver">—</strong></div>
-        <div><span>Started</span><strong id="activeStart">—</strong></div>
-      </div>
-
-      <form id="endForm" novalidate>
-        <div class="two-col">
-          <label>End Time
-            <input id="endTime" type="text" readonly>
-          </label>
-          <label>End Odometer <span class="unit">KM</span>
-            <input id="endKM" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 45286.5" required>
-          </label>
-        </div>
-
-        <div class="section-title">Collection & expenses</div>
-
-        <div class="two-col">
-          <label>Total Trips
-            <input id="trips" type="number" inputmode="numeric" min="0" step="1" placeholder="0">
-          </label>
-          <label>Total Collection <span class="unit">₹</span>
-            <input id="collection" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0">
-          </label>
-        </div>
-
-        <div class="two-col">
-          <label>CNG Cost <span class="unit">₹</span>
-            <input id="cngCost" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0">
-          </label>
-          <label>CNG Quantity <span class="unit">L</span>
-            <input id="cngLitres" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0">
-          </label>
-        </div>
-
-        <div class="two-col">
-          <label>Toll / FASTag <span class="unit">₹</span>
-            <input id="toll" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0">
-          </label>
-          <label>Other Expenses <span class="unit">₹</span>
-            <input id="otherExpense" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0">
-          </label>
-        </div>
-
-        <label>Payment Type
-          <select id="paymentType">
-            <option value="">Select payment type</option>
-            <option>Cash</option>
-            <option>UPI</option>
-            <option>Ola</option>
-            <option>Uber</option>
-            <option>Other</option>
-          </select>
-        </label>
-
-        <label>Remarks <span class="optional">Optional</span>
-          <textarea id="remarks" rows="3" maxlength="300" placeholder="Anything worth noting?"></textarea>
-        </label>
-
-        <div class="summary-grid">
-          <div><span>Total KM</span><strong id="totalKM">0.0</strong><small>KM</small></div>
-          <div><span>Net Collection</span><strong id="netCollection">₹0</strong><small>after expenses</small></div>
-          <div><span>Collection / KM</span><strong id="collectionPerKM">₹0.00</strong><small>per KM</small></div>
-          <div><span>KM / Litre</span><strong id="kmPerLitre">0.00</strong><small>efficiency</small></div>
-        </div>
-
-        <button class="primary-btn" type="submit" id="submitEndBtn">
-          Submit Trip <span>✓</span>
-        </button>
-      </form>
-    </section>
-
-    <section class="success-card hidden" id="successCard">
-      <div class="success-icon">✓</div>
-      <div class="eyebrow">SAVED SUCCESSFULLY</div>
-      <h1>Trip recorded</h1>
-      <p>The trip details have been submitted to VIA CABS.</p>
-      <button class="secondary-btn" id="newTripBtn">Start New Trip</button>
-    </section>
-
-    <div class="toast" id="toast" role="alert"></div>
-    <footer>VIA CABS · Trip Log</footer>
-  </main>
-  <script src="app.js"></script>
-</body>
-</html>
+<body><main class="app-shell">
+<header class="topbar"><div class="brand"><img src="assets/via-logo.svg" alt="VIA CABS" class="brand-logo"><div><div class="brand-name">VIA <span>CABS</span></div><div class="brand-subtitle">Driver Trip Log</div></div></div><div class="live-dot" title="Online"></div></header>
+<section class="progress"><div class="step active" id="stepStart"><span>1</span><strong>Start Trip</strong></div><div class="progress-line"></div><div class="step" id="stepEnd"><span>2</span><strong>End Trip</strong></div></section>
+<section class="card" id="startCard"><div class="card-heading"><div class="eyebrow">TODAY'S TRIP</div><h1>Start Trip</h1><p>Enter your driver and vehicle details to begin.</p></div>
+<form id="startForm" novalidate>
+<label>Driver Name<input id="driver" type="text" autocomplete="name" maxlength="80" placeholder="Enter your name" required></label>
+<label>Vehicle Number<input id="vehicle" type="text" autocomplete="off" maxlength="20" placeholder="e.g. MH12AB1234" required></label>
+<div class="two-col"><label>Date<input id="date" type="text" readonly></label><label>Start Time<input id="startTime" type="text" readonly></label></div>
+<label>Start Odometer <span class="unit">KM</span><input id="startKM" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 45218.5" required></label>
+<button class="primary-btn" type="submit">Start Trip <span>→</span></button></form></section>
+<section class="card hidden" id="endCard"><div class="active-trip"><div><div class="eyebrow">TRIP IN PROGRESS</div><h1>End Trip</h1></div><div class="vehicle-badge" id="activeVehicle">—</div></div>
+<div class="trip-meta"><div><span>Driver</span><strong id="activeDriver">—</strong></div><div><span>Started</span><strong id="activeStart">—</strong></div></div>
+<form id="endForm" novalidate><div class="two-col"><label>End Time<input id="endTime" type="text" readonly></label><label>End Odometer <span class="unit">KM</span><input id="endKM" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 45286.5" required></label></div>
+<div class="section-title">Collection & expenses</div><label>Total Collection <span class="unit">₹</span><input id="collection" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"></label>
+<div class="two-col"><label>CNG Cost <span class="unit">₹</span><input id="cngCost" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"></label><label>CNG Quantity <span class="unit">L</span><input id="cngLitres" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"></label></div>
+<div class="two-col"><label>Toll / FASTag <span class="unit">₹</span><input id="toll" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"></label><label>Other Expenses <span class="unit">₹</span><input id="otherExpense" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0"></label></div>
+<label>Payment Type<select id="paymentType"><option value="">Select payment type</option><option>Cash</option><option>UPI</option><option>Ola</option><option>Uber</option><option>Other</option></select></label>
+<label>Remarks <span class="optional">Optional</span><textarea id="remarks" rows="3" maxlength="300" placeholder="Anything worth noting?"></textarea></label>
+<div class="summary-grid"><div><span>Total KM</span><strong id="totalKM">0.0</strong><small>KM</small></div><div><span>Net Collection</span><strong id="netCollection">₹0</strong><small>after expenses</small></div><div><span>Collection / KM</span><strong id="collectionPerKM">₹0.00</strong><small>per KM</small></div><div><span>KM / Litre</span><strong id="kmPerLitre">0.00</strong><small>efficiency</small></div></div>
+<button class="primary-btn" type="submit" id="submitEndBtn">Submit Trip <span>✓</span></button></form></section>
+<section class="success-card hidden" id="successCard"><div class="success-icon">✓</div><div class="eyebrow">SAVED SUCCESSFULLY</div><h1>Trip recorded</h1><p>The trip details have been submitted to VIA CABS.</p><button class="secondary-btn" id="newTripBtn">Start New Trip</button></section>
+<div class="toast" id="toast" role="alert"></div><footer>VIA CABS · Trip Log</footer></main><script src="app.js"></script></body></html>
