@@ -1,4 +1,4 @@
-const API_URL='https://script.google.com/macros/s/AKfycbx6DLeZ_svRlYYltAyqjvDLlS_hWoaXlNpl5toWMSwxBnc-XljdLRrr1cKISzeS-HMt/exec';
+const API_URL='https://script.google.com/macros/s/AKfycbwfHrGdzZYCx4P8EAQ4uWd6cmWBrGmR2K8Zju32PmxhfmKcZZwPtK5H17eJzOuyUmxN/exec';
 const $=id=>document.getElementById(id), startCard=$('startCard'), endCard=$('endCard'), successCard=$('successCard'), startForm=$('startForm'), endForm=$('endForm'), toast=$('toast');
 let activeTrip=null,toastTimer;
 function nowParts(){const now=new Date();return{date:new Intl.DateTimeFormat('en-IN',{day:'2-digit',month:'2-digit',year:'numeric',timeZone:'Asia/Kolkata'}).format(now),time:new Intl.DateTimeFormat('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'}).format(now)}}
